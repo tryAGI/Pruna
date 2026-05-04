@@ -1,0 +1,252 @@
+openapi: 3.0.3
+info:
+  title: Pruna API
+  version: 1.0.0
+  description: API for Pruna prediction, status, delivery, and file upload operations.
+servers:
+  - url: https://api.pruna.ai/v1
+security:
+  - ApiKeyAuth: []
+paths:
+  /predictions:
+    post:
+      operationId: createPrediction
+      summary: Create a prediction for a Pruna model.
+      parameters:
+        - name: Model
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/ModelId'
+        - name: Try-Sync
+          in: header
+          required: false
+          schema:
+            type: boolean
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePredictionRequest'
+      responses:
+        '200':
+          description: Prediction response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prediction'
+  /predictions/status/{id}:
+    get:
+      operationId: getPredictionStatus
+      summary: Get prediction status and result metadata.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Prediction status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prediction'
+  /predictions/delivery/{delivery_path}:
+    get:
+      operationId: getPredictionDelivery
+      summary: Download or retrieve a generated prediction artifact.
+      parameters:
+        - name: delivery_path
+          in: path
+          required: true
+          schema:
+            type: string
+          style: simple
+          explode: false
+      responses:
+        '200':
+          description: Generated artifact.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /files:
+    post:
+      operationId: uploadFile
+      summary: Upload a file for prediction inputs.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Uploaded file metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileObject'
+  /files/{id}:
+    get:
+      operationId: getFile
+      summary: Get uploaded file metadata.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Uploaded file metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileObject'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
+  schemas:
+    ModelId:
+      type: string
+      enum:
+        - p-video
+        - wan-t2v
+        - wan-i2v
+        - vace
+        - p-image
+        - p-image-edit
+        - p-image-upscale
+        - flux-dev
+        - flux-dev-lora
+        - wan-image-small
+        - qwen-image
+        - qwen-image-edit-plus
+    CreatePredictionRequest:
+      type: object
+      required:
+        - input
+      additionalProperties: true
+      properties:
+        input:
+          $ref: '#/components/schemas/PredictionInput'
+    PredictionInput:
+      type: object
+      additionalProperties: true
+      properties:
+        prompt:
+          type: string
+        image:
+          type: string
+          format: uri
+        audio:
+          type: string
+          format: uri
+        duration:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 20
+        resolution:
+          type: string
+          enum:
+            - 720p
+            - 1080p
+        fps:
+          type: integer
+          format: int32
+          enum:
+            - 24
+            - 48
+        aspect_ratio:
+          type: string
+          enum:
+            - '16:9'
+            - '9:16'
+            - '4:3'
+            - '3:4'
+            - '3:2'
+            - '2:3'
+            - '1:1'
+        seed:
+          type: integer
+          format: int64
+        draft:
+          type: boolean
+        save_audio:
+          type: boolean
+        last_frame_image:
+          type: string
+          format: uri
+    Prediction:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        model:
+          $ref: '#/components/schemas/ModelId'
+        input:
+          $ref: '#/components/schemas/PredictionInput'
+        status:
+          type: string
+        get_url:
+          type: string
+          format: uri
+        generation_url:
+          type: string
+        output:
+          nullable: true
+        error:
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+    FileObject:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        content_type:
+          type: string
+        size:
+          type: integer
+          format: int64
+        etag:
+          type: string
+        checksums:
+          type: object
+          additionalProperties:
+            type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        urls:
+          type: object
+          additionalProperties:
+            type: string
