@@ -121,5 +121,6 @@ namespace Pruna
         public Prediction()
         {
         }
+
     }
 }
