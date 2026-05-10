@@ -131,5 +131,6 @@ namespace Pruna
         public PredictionInput()
         {
         }
+
     }
 }
