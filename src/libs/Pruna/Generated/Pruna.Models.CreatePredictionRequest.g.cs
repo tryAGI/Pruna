@@ -40,5 +40,6 @@ namespace Pruna
         public CreatePredictionRequest()
         {
         }
+
     }
 }
