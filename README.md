@@ -40,6 +40,13 @@ using Pruna;
 using var client = new PrunaClient(apiKey);
 ```
 
+### CLI
+
+```bash
+dotnet tool install --global Pruna.CLI --prerelease
+pruna api --help
+```
+
 <!-- EXAMPLES:START -->
 ### P-Video
 Create a Pruna P-Video text-to-video prediction.
