@@ -10,3 +10,20 @@ autosdk generate openapi.yaml \
   --output Generated \
   --security-scheme ApiKey:Header:apikey \
   --exclude-deprecated-operations
+
+rm -rf ../../cli/Pruna.CLI
+
+autosdk cli-project openapi.yaml \
+  --output ../../cli/Pruna.CLI \
+  --sdk-project ../../libs/Pruna/Pruna.csproj \
+  --targetFramework net10.0 \
+  --namespace Pruna \
+  --clientClassName PrunaClient \
+  --package-id Pruna.CLI \
+  --tool-command-name pruna \
+  --user-secrets-id Pruna.CLI \
+  --api-key-env-var PRUNA_API_KEY \
+  --base-url-env-var PRUNA_BASE_URL \
+  --cli-credential-file \
+  --exclude-deprecated-operations \
+  --security-scheme ApiKey:Header:apikey
