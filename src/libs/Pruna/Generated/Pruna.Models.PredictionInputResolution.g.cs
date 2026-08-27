@@ -4,16 +4,16 @@
 namespace Pruna
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum PredictionInputResolution
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x1080p,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x720p,
     }
