@@ -4,19 +4,19 @@
 namespace Pruna
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class UploadFileRequest
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("content")]
         [global::System.Text.Json.Serialization.JsonRequired]
         public required byte[] Content { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("contentname")]
         [global::System.Text.Json.Serialization.JsonRequired]

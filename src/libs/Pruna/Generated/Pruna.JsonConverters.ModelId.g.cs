@@ -20,7 +20,7 @@ namespace Pruna.JsonConverters
                     {
                         return global::Pruna.ModelIdExtensions.ToEnum(stringValue) ?? default;
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

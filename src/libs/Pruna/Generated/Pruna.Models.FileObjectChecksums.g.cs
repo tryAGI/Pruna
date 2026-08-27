@@ -4,7 +4,7 @@
 namespace Pruna
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class FileObjectChecksums
     {

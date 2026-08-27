@@ -4,56 +4,56 @@
 namespace Pruna
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum ModelId
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         FluxDev,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         FluxDevLora,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PImage,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PImageEdit,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PImageUpscale,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PVideo,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         QwenImage,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         QwenImageEditPlus,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Vace,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         WanI2v,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         WanImageSmall,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         WanT2v,
     }
