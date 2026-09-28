@@ -13,6 +13,8 @@ internal static partial class GetPredictionDeliveryCommandApiCommand
         Description = @"",
     };
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-prediction-delivery", @"Download or retrieve a generated prediction artifact.");
@@ -32,6 +34,7 @@ internal static partial class GetPredictionDeliveryCommandApiCommand
 
                                 await CliRuntime.WriteBinaryAsync(parseResult, response, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
