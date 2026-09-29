@@ -43,9 +43,9 @@ internal static partial class UploadFileCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"upload-file", @"Upload a file for prediction inputs.");
+        var command = new Command(commandName ?? @"upload-file", @"Upload a file for prediction inputs.");
                         command.Options.Add(Content);
                         command.Options.Add(Contentname);
 
