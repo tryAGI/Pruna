@@ -15,9 +15,9 @@ internal static partial class GetPredictionDeliveryCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-prediction-delivery", @"Download or retrieve a generated prediction artifact.");
+        var command = new Command(commandName ?? @"get-prediction-delivery", @"Download or retrieve a generated prediction artifact.");
                         command.Arguments.Add(DeliveryPath);
 
 

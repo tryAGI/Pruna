@@ -35,9 +35,9 @@ internal static partial class GetPredictionStatusCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-prediction-status", @"Get prediction status and result metadata.");
+        var command = new Command(commandName ?? @"get-prediction-status", @"Get prediction status and result metadata.");
                         command.Arguments.Add(Id);
 
 

@@ -47,9 +47,9 @@ internal static partial class CreatePredictionCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-prediction", @"Create a prediction for a Pruna model.");
+        var command = new Command(commandName ?? @"create-prediction", @"Create a prediction for a Pruna model.");
                         command.Options.Add(Model);
                         command.Options.Add(TrySync);
                         command.Options.Add(InputOption);
